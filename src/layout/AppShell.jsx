@@ -16,12 +16,21 @@ import { PropertiesInspector } from '../builder/PropertiesInspector.jsx'
 import { PreviewRenderer } from '../preview/PreviewRenderer.jsx'
 import { CodeViewer } from '../codeviewer/CodeViewer.jsx'
 import { ExportDialog } from '../export/ExportDialog.jsx'
+import { FormsDialog } from '../storage/FormsDialog.jsx'
 import { getFieldDefinition } from '../schema/fieldRegistry.js'
 import { FieldTypeIcon } from '../builder/fieldIcons.jsx'
 import { IconButton, Button } from '../components/ui/Button'
 import { Panel } from '../components/ui/Panel'
 import { Modal } from '../components/ui/Modal.jsx'
-import { SunIcon, MoonIcon, LibraryIcon, PropertiesIcon, UndoIcon, RedoIcon } from '../components/ui/icons'
+import {
+  SunIcon,
+  MoonIcon,
+  LibraryIcon,
+  PropertiesIcon,
+  UndoIcon,
+  RedoIcon,
+  FormsIcon,
+} from '../components/ui/icons'
 import './AppShell.css'
 
 export function AppShell() {
@@ -33,6 +42,7 @@ export function AppShell() {
   const [isPreviewOpen, setPreviewOpen] = useState(false)
   const [isCodeViewerOpen, setCodeViewerOpen] = useState(false)
   const [isExportOpen, setExportOpen] = useState(false)
+  const [isFormsOpen, setFormsOpen] = useState(false)
 
   const isDark =
     theme === 'dark' ||
@@ -114,6 +124,9 @@ export function AppShell() {
           </div>
 
           <div className="ff-shell__header-actions">
+            <IconButton label="My forms" onClick={() => setFormsOpen(true)}>
+              <FormsIcon size={16} />
+            </IconButton>
             <IconButton label="Undo" onClick={undo} disabled={!canUndo}>
               <UndoIcon size={16} />
             </IconButton>
@@ -216,6 +229,12 @@ export function AppShell() {
       {isExportOpen ? (
         <Modal title={`Export — ${schema.name}`} onClose={() => setExportOpen(false)}>
           <ExportDialog schema={schema} onClose={() => setExportOpen(false)} />
+        </Modal>
+      ) : null}
+
+      {isFormsOpen ? (
+        <Modal title="My Forms" onClose={() => setFormsOpen(false)}>
+          <FormsDialog onClose={() => setFormsOpen(false)} />
         </Modal>
       ) : null}
     </DndContext>

@@ -10,4 +10,5 @@ export {
   Redo2 as RedoIcon,
   Plus as PlusIcon,
   X as CloseIcon,
+  FolderOpen as FormsIcon,
 } from 'lucide-react'

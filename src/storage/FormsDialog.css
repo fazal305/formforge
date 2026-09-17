@@ -1,0 +1,89 @@
+.ff-forms-dialog {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.ff-forms-dialog__section h3 {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+  margin: 0 0 var(--space-2);
+}
+
+.ff-forms-dialog__actions {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.ff-forms-dialog__error {
+  margin-top: var(--space-2);
+  font-size: 12px;
+  color: var(--color-danger);
+}
+
+.ff-forms-dialog__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.ff-forms-dialog__list li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+}
+
+.ff-forms-dialog__list-name {
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ff-forms-dialog__list-name:hover {
+  color: var(--color-accent);
+}
+
+.ff-forms-dialog__list-date {
+  flex-shrink: 0;
+  font-size: 11px;
+  color: var(--color-text-faint);
+}
+
+.ff-forms-dialog__list-delete {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  padding: var(--space-1) var(--space-2);
+  font-size: 11px;
+  color: var(--color-text-faint);
+  border-radius: var(--radius-sm);
+}
+
+.ff-forms-dialog__list-delete:hover {
+  color: var(--color-danger);
+  background: var(--color-danger-muted);
+}
+
+.ff-forms-dialog__list-delete[data-pending='true'] {
+  color: var(--color-danger);
+  font-weight: 600;
+  background: var(--color-danger-muted);
+}

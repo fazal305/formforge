@@ -1,0 +1,167 @@
+.ff-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-width: 0;
+}
+
+.ff-shell__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--header-height);
+  flex-shrink: 0;
+  padding: 0 var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.ff-shell__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.ff-shell__brand-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-md);
+  background: var(--color-accent);
+  color: var(--color-text-on-accent);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.ff-shell__brand-name {
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: -0.01em;
+}
+
+.ff-shell__header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.ff-shell__body {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: var(--panel-library-width) minmax(0, 1fr) var(--panel-inspector-width);
+  /* Off-canvas mobile drawers translate outside this box; clip them here
+     rather than suppressing overflow globally on body/html. */
+  overflow-x: hidden;
+}
+
+.ff-shell__library,
+.ff-shell__inspector {
+  min-width: 0;
+  min-height: 0;
+  border-right: 1px solid var(--color-border);
+}
+
+.ff-shell__inspector {
+  border-right: none;
+  border-left: 1px solid var(--color-border);
+}
+
+.ff-shell__canvas {
+  min-width: 0;
+  min-height: 0;
+  background: var(--color-surface-sunken);
+}
+
+.ff-shell__scrim {
+  display: none;
+}
+
+.ff-shell__mobile-toolbar {
+  display: none;
+}
+
+/* --- Mobile: canvas takes the full width; library/inspector become drawers --- */
+@media (max-width: 767px) {
+  .ff-shell__body {
+    display: block;
+  }
+
+  .ff-shell__canvas {
+    height: 100%;
+  }
+
+  .ff-shell__library,
+  .ff-shell__inspector {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: min(85%, 320px);
+    z-index: 20;
+    box-shadow: var(--shadow-lg);
+    transform: translateX(-105%);
+    transition: transform var(--transition-base);
+  }
+
+  .ff-shell__library {
+    left: 0;
+  }
+
+  .ff-shell__library[data-open='true'] {
+    transform: translateX(0);
+  }
+
+  .ff-shell__inspector {
+    right: 0;
+    border-left: 1px solid var(--color-border);
+    transform: translateX(105%);
+  }
+
+  .ff-shell__inspector[data-open='true'] {
+    transform: translateX(0);
+  }
+
+  .ff-shell__scrim {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    border: none;
+    background: rgba(0, 0, 0, 0.35);
+    padding: 0;
+  }
+
+  .ff-shell__mobile-toolbar {
+    display: flex;
+    flex-shrink: 0;
+    border-top: 1px solid var(--color-border);
+    background: var(--color-surface);
+  }
+
+  .ff-shell__mobile-toolbar-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-1);
+    padding: var(--space-2) 0 var(--space-3);
+    border: none;
+    background: transparent;
+    color: var(--color-text-muted);
+    font-size: 11px;
+  }
+
+  .ff-shell__mobile-toolbar-item[data-active='true'] {
+    color: var(--color-accent);
+  }
+
+  .ff-shell__header-actions :is(.ff-button--ghost, .ff-button--secondary) {
+    display: none;
+  }
+}

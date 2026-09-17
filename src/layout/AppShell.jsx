@@ -22,6 +22,7 @@ import { FieldTypeIcon } from '../builder/fieldIcons.jsx'
 import { IconButton, Button } from '../components/ui/Button'
 import { Panel } from '../components/ui/Panel'
 import { Modal } from '../components/ui/Modal.jsx'
+import { ErrorBoundary } from '../components/ui/ErrorBoundary.jsx'
 import {
   SunIcon,
   MoonIcon,
@@ -127,10 +128,10 @@ export function AppShell() {
             <IconButton label="My forms" onClick={() => setFormsOpen(true)}>
               <FormsIcon size={16} />
             </IconButton>
-            <IconButton label="Undo" onClick={undo} disabled={!canUndo}>
+            <IconButton label="Undo (Ctrl/Cmd+Z)" onClick={undo} disabled={!canUndo}>
               <UndoIcon size={16} />
             </IconButton>
-            <IconButton label="Redo" onClick={redo} disabled={!canRedo}>
+            <IconButton label="Redo (Ctrl/Cmd+Shift+Z)" onClick={redo} disabled={!canRedo}>
               <RedoIcon size={16} />
             </IconButton>
             <Button variant="ghost" size="sm" onClick={() => setPreviewOpen(true)}>
@@ -212,7 +213,9 @@ export function AppShell() {
 
       {isPreviewOpen ? (
         <Modal title={`Preview — ${schema.name}`} onClose={() => setPreviewOpen(false)}>
-          <PreviewRenderer schema={schema} />
+          <ErrorBoundary title="Couldn't render the preview">
+            <PreviewRenderer schema={schema} />
+          </ErrorBoundary>
         </Modal>
       ) : null}
 
@@ -222,13 +225,17 @@ export function AppShell() {
           size="large"
           onClose={() => setCodeViewerOpen(false)}
         >
-          <CodeViewer schema={schema} />
+          <ErrorBoundary title="Generation error">
+            <CodeViewer schema={schema} />
+          </ErrorBoundary>
         </Modal>
       ) : null}
 
       {isExportOpen ? (
         <Modal title={`Export — ${schema.name}`} onClose={() => setExportOpen(false)}>
-          <ExportDialog schema={schema} onClose={() => setExportOpen(false)} />
+          <ErrorBoundary title="Generation error">
+            <ExportDialog schema={schema} onClose={() => setExportOpen(false)} />
+          </ErrorBoundary>
         </Modal>
       ) : null}
 

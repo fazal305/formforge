@@ -18,7 +18,10 @@
   /* ---- Color: text ---- */
   --color-text: #17171a;
   --color-text-muted: #6b6b66;
-  --color-text-faint: #9a9a94;
+  /* #9a9a94 measured 2.6:1 against this background — fails WCAG AA (4.5:1)
+     for the normal-size text it's actually used on (group titles, field
+     metadata). This value holds ~5.1:1. */
+  --color-text-faint: #686866;
   --color-text-on-accent: #ffffff;
 
   /* ---- Color: accent + semantic ---- */
@@ -84,7 +87,7 @@
 
   --color-text: #ededec;
   --color-text-muted: #a3a3a0;
-  --color-text-faint: #6f6f6c;
+  --color-text-faint: #86867e;
   --color-text-on-accent: #0d0d0f;
 
   --color-accent: #6fcf9e;
@@ -119,7 +122,7 @@
 
     --color-text: #ededec;
     --color-text-muted: #a3a3a0;
-    --color-text-faint: #6f6f6c;
+    --color-text-faint: #86867e;
     --color-text-on-accent: #0d0d0f;
 
     --color-accent: #6fcf9e;

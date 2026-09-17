@@ -17,6 +17,7 @@ export function FormsDialog({ onClose }) {
   const { schema, loadSchema } = useBuilder()
   const [savedForms, setSavedForms] = useState(() => listSavedForms())
   const [importError, setImportError] = useState(null)
+  const [saveError, setSaveError] = useState(null)
   const [saveConfirmation, setSaveConfirmation] = useState(false)
   const [pendingDeleteId, setPendingDeleteId] = useState(null)
   const fileInputRef = useRef(null)
@@ -26,17 +27,26 @@ export function FormsDialog({ onClose }) {
   }
 
   function handleSave() {
-    saveForm(schema)
+    setSaveError(null)
+    const ok = saveForm(schema)
+    if (!ok) {
+      setSaveError("Couldn't save — this browser's storage may be full or unavailable.")
+      return
+    }
     refreshList()
     setSaveConfirmation(true)
     setTimeout(() => setSaveConfirmation(false), 1500)
   }
 
   function handleOpen(id) {
+    setSaveError(null)
     const found = getSavedForm(id)
     if (found) {
       loadSchema(found)
       onClose()
+    } else {
+      setSaveError('This saved form could not be read — it may be corrupted, and was skipped rather than applied.')
+      refreshList()
     }
   }
 
@@ -82,6 +92,11 @@ export function FormsDialog({ onClose }) {
             Export as JSON
           </Button>
         </div>
+        {saveError ? (
+          <p className="ff-forms-dialog__error" role="alert">
+            {saveError}
+          </p>
+        ) : null}
       </section>
 
       <section className="ff-forms-dialog__section">

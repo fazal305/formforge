@@ -1,0 +1,65 @@
+/*
+  Token colors mapped to our own design tokens rather than importing a
+  Prism theme wholesale — keeps the code viewer inside FormForge's own
+  light/dark system instead of a foreign, non-adapting palette (section 46).
+*/
+.ff-code pre[class*='language-'],
+.ff-code code[class*='language-'] {
+  color: var(--color-code-text);
+  background: none;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  line-height: 1.6;
+  text-shadow: none;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: var(--color-code-muted);
+  font-style: italic;
+}
+
+.token.punctuation {
+  color: var(--color-code-muted);
+}
+
+.token.tag,
+.token.keyword,
+.token.selector,
+.token.deleted {
+  color: #e0776a;
+}
+
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol {
+  color: #e0a840;
+}
+
+.token.string,
+.token.attr-value,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: #6fcf9e;
+}
+
+.token.function,
+.token.class-name {
+  color: #7fb0e0;
+}
+
+.token.attr-name,
+.token.property,
+.token.variable,
+.token.operator {
+  color: #c9a3e0;
+}
+
+.token.important,
+.token.bold {
+  font-weight: 700;
+}

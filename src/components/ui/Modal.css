@@ -21,6 +21,11 @@
   box-shadow: var(--shadow-lg);
 }
 
+.ff-modal--large {
+  max-width: 960px;
+  height: 85vh;
+}
+
 .ff-modal__header {
   display: flex;
   align-items: center;
@@ -40,6 +45,13 @@
   min-height: 0;
   overflow-y: auto;
   padding: var(--space-5);
+}
+
+.ff-modal--large .ff-modal__body {
+  padding: 0;
+  display: flex;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .ff-modal__footer {

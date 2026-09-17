@@ -4,7 +4,7 @@ import { IconButton } from './Button.jsx'
 import { CloseIcon } from './icons.jsx'
 import './Modal.css'
 
-export function Modal({ title, onClose, children, footer }) {
+export function Modal({ title, onClose, children, footer, size = 'default' }) {
   const closeButtonRef = useRef(null)
 
   useEffect(() => {
@@ -19,7 +19,7 @@ export function Modal({ title, onClose, children, footer }) {
 
   return createPortal(
     <div className="ff-modal-backdrop" onMouseDown={(e) => e.target === e.currentTarget && onClose()}>
-      <div className="ff-modal" role="dialog" aria-modal="true" aria-label={title}>
+      <div className={`ff-modal ff-modal--${size}`} role="dialog" aria-modal="true" aria-label={title}>
         <header className="ff-modal__header">
           <h2 className="ff-modal__title">{title}</h2>
           <IconButton label="Close" onClick={onClose} ref={closeButtonRef}>

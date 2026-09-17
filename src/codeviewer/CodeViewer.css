@@ -1,0 +1,112 @@
+.ff-code-viewer {
+  display: flex;
+  width: 100%;
+  min-height: 0;
+}
+
+.ff-code-viewer__files {
+  width: 200px;
+  flex-shrink: 0;
+  overflow-y: auto;
+  border-right: 1px solid var(--color-border);
+  padding: var(--space-3);
+}
+
+.ff-code-viewer__group {
+  margin-bottom: var(--space-4);
+}
+
+.ff-code-viewer__group-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+  margin: 0 0 var(--space-1) var(--space-2);
+}
+
+.ff-code-viewer__file {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: var(--space-2);
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-text-muted);
+  font-size: 12.5px;
+  font-family: var(--font-mono);
+}
+
+.ff-code-viewer__file:hover {
+  background: var(--color-surface-sunken);
+  color: var(--color-text);
+}
+
+.ff-code-viewer__file[data-active='true'] {
+  background: var(--color-accent-muted);
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.ff-code-viewer__content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.ff-code-viewer__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  min-width: 0;
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+  flex-shrink: 0;
+}
+
+.ff-code-viewer__path {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.ff-code-viewer__actions {
+  display: flex;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+
+@media (max-width: 640px) {
+  .ff-code-viewer {
+    flex-direction: column;
+  }
+
+  .ff-code-viewer__files {
+    width: 100%;
+    max-height: 35%;
+    border-right: none;
+    border-bottom: 1px solid var(--color-border);
+  }
+}
+
+.ff-code {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  background: var(--color-code-bg);
+}
+
+.ff-code pre {
+  margin: 0;
+  padding: var(--space-4);
+}
+
+.mono {
+  font-family: var(--font-mono);
+}

@@ -14,6 +14,7 @@ import { FieldLibrary } from '../builder/FieldLibrary.jsx'
 import { FormCanvas } from '../builder/FormCanvas.jsx'
 import { PropertiesInspector } from '../builder/PropertiesInspector.jsx'
 import { PreviewRenderer } from '../preview/PreviewRenderer.jsx'
+import { CodeViewer } from '../codeviewer/CodeViewer.jsx'
 import { getFieldDefinition } from '../schema/fieldRegistry.js'
 import { FieldTypeIcon } from '../builder/fieldIcons.jsx'
 import { IconButton, Button } from '../components/ui/Button'
@@ -29,6 +30,7 @@ export function AppShell() {
   const [mobilePanel, setMobilePanel] = useState(null) // null | 'library' | 'inspector'
   const [activeDrag, setActiveDrag] = useState(null)
   const [isPreviewOpen, setPreviewOpen] = useState(false)
+  const [isCodeViewerOpen, setCodeViewerOpen] = useState(false)
 
   const isDark =
     theme === 'dark' ||
@@ -119,7 +121,7 @@ export function AppShell() {
             <Button variant="ghost" size="sm" onClick={() => setPreviewOpen(true)}>
               Preview
             </Button>
-            <Button variant="secondary" size="sm" disabled>
+            <Button variant="secondary" size="sm" onClick={() => setCodeViewerOpen(true)}>
               Generate
             </Button>
             <Button variant="primary" size="sm" disabled>
@@ -196,6 +198,16 @@ export function AppShell() {
       {isPreviewOpen ? (
         <Modal title={`Preview — ${schema.name}`} onClose={() => setPreviewOpen(false)}>
           <PreviewRenderer schema={schema} />
+        </Modal>
+      ) : null}
+
+      {isCodeViewerOpen ? (
+        <Modal
+          title={`Generated code — ${schema.name}`}
+          size="large"
+          onClose={() => setCodeViewerOpen(false)}
+        >
+          <CodeViewer schema={schema} />
         </Modal>
       ) : null}
     </DndContext>

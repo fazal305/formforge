@@ -13,7 +13,12 @@ export function generatePhpSubmit(schema) {
     .filter((f) => f.type === 'file')
     .map((f) => ({ name: f.name, validation: f.validation ?? {}, fileConfig: f.fileConfig ?? {} }))
 
-  const storableFields = schema.fields.filter((f) => f.type !== 'file')
+  // Password fields are never persisted — storing submitted plaintext
+  // credentials would be an active security liability, not a convenience,
+  // and this form builder gives no way to hash them meaningfully as a
+  // generic "submission" record. Kept consistent with the SQL generator's
+  // column mapping (Phase 9), which excludes them from the table entirely.
+  const storableFields = schema.fields.filter((f) => f.type !== 'file' && f.type !== 'password')
   const columnNames = [...storableFields.map((f) => f.name), ...uploadFields.map((f) => f.name)]
 
   const tableName = getTableName(schema)

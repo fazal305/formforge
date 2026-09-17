@@ -1,0 +1,45 @@
+.ff-preview-form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+.ff-preview-form[data-layout='two-column'] {
+  grid-template-columns: 1fr 1fr;
+}
+
+.ff-preview-form__footer {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--color-border);
+}
+
+.ff-preview-form__simulate-failure {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 12px;
+  color: var(--color-text-faint);
+}
+
+.ff-preview-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  text-align: center;
+  padding: var(--space-8) var(--space-4);
+  font-size: 14px;
+}
+
+.ff-preview-result--success {
+  color: var(--color-success);
+}
+
+.ff-preview-result--error {
+  color: var(--color-danger);
+}

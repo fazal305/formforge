@@ -1,3 +1,4 @@
+import { forwardRef } from 'react'
 import './Button.css'
 
 const VARIANTS = ['primary', 'secondary', 'ghost', 'danger']
@@ -14,9 +15,13 @@ export function Button({ variant = 'secondary', size = 'md', children, className
   )
 }
 
-export function IconButton({ label, children, active = false, className = '', ...rest }) {
+export const IconButton = forwardRef(function IconButton(
+  { label, children, active = false, className = '', ...rest },
+  ref,
+) {
   return (
     <button
+      ref={ref}
       className={`ff-icon-button ${active ? 'is-active' : ''} ${className}`.trim()}
       aria-label={label}
       title={label}
@@ -25,4 +30,4 @@ export function IconButton({ label, children, active = false, className = '', ..
       {children}
     </button>
   )
-}
+})

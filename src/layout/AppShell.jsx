@@ -7,16 +7,18 @@ import {
   useSensors,
   DragOverlay,
 } from '@dnd-kit/core'
-import { arrayMove, sortableKeyboardCoordinates } from '@dnd-kit/sortable'
+import { sortableKeyboardCoordinates } from '@dnd-kit/sortable'
 import { useTheme } from '../theme/ThemeContext'
 import { useBuilder } from '../builder/BuilderContext.jsx'
 import { FieldLibrary } from '../builder/FieldLibrary.jsx'
 import { FormCanvas } from '../builder/FormCanvas.jsx'
 import { PropertiesInspector } from '../builder/PropertiesInspector.jsx'
+import { PreviewRenderer } from '../preview/PreviewRenderer.jsx'
 import { getFieldDefinition } from '../schema/fieldRegistry.js'
 import { FieldTypeIcon } from '../builder/fieldIcons.jsx'
 import { IconButton, Button } from '../components/ui/Button'
 import { Panel } from '../components/ui/Panel'
+import { Modal } from '../components/ui/Modal.jsx'
 import { SunIcon, MoonIcon, LibraryIcon, PropertiesIcon, UndoIcon, RedoIcon } from '../components/ui/icons'
 import './AppShell.css'
 
@@ -26,6 +28,7 @@ export function AppShell() {
     useBuilder()
   const [mobilePanel, setMobilePanel] = useState(null) // null | 'library' | 'inspector'
   const [activeDrag, setActiveDrag] = useState(null)
+  const [isPreviewOpen, setPreviewOpen] = useState(false)
 
   const isDark =
     theme === 'dark' ||
@@ -113,7 +116,7 @@ export function AppShell() {
             <IconButton label="Redo" onClick={redo} disabled={!canRedo}>
               <RedoIcon size={16} />
             </IconButton>
-            <Button variant="ghost" size="sm" disabled>
+            <Button variant="ghost" size="sm" onClick={() => setPreviewOpen(true)}>
               Preview
             </Button>
             <Button variant="secondary" size="sm" disabled>
@@ -189,6 +192,12 @@ export function AppShell() {
           </div>
         ) : null}
       </DragOverlay>
+
+      {isPreviewOpen ? (
+        <Modal title={`Preview — ${schema.name}`} onClose={() => setPreviewOpen(false)}>
+          <PreviewRenderer schema={schema} />
+        </Modal>
+      ) : null}
     </DndContext>
   )
 }

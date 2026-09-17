@@ -218,7 +218,13 @@ export function generateJs(schema) {
   }
 
   function buildPayload() {
-    ${hasFileField ? 'var data = new FormData(form);\n    return { body: data, headers: {} };' : 'var values = {};\n    FIELDS.forEach(function (field) { values[field.name] = getValue(field); });\n    return { body: JSON.stringify(values), headers: { "Content-Type": "application/json" } };'}
+    // Built from FormData (the actual DOM state) rather than FIELDS, so
+    // hidden-field values are included — FIELDS deliberately excludes
+    // hidden fields (they have nothing to validate or wire a blur handler
+    // to), but they still need to reach the server.
+    ${hasFileField
+      ? 'var data = new FormData(form);\n    return { body: data, headers: {} };'
+      : 'var formData = new FormData(form);\n    var values = {};\n    formData.forEach(function (value, key) { values[key] = value; });\n    return { body: JSON.stringify(values), headers: { "Content-Type": "application/json" } };'}
   }
 
   form.addEventListener("submit", function (event) {

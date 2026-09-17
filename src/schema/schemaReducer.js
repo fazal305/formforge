@@ -1,14 +1,6 @@
 import { createField } from './createSchema.js'
 import { toSafeIdentifier, ensureUniqueIdentifier } from './identifier.js'
-
-/** Immutable set at a dot-path ("validation.minLength") — used for propertySchema-driven edits. */
-function setPath(obj, path, value) {
-  const keys = path.split('.')
-  if (keys.length === 1) return { ...obj, [keys[0]]: value }
-
-  const [head, ...rest] = keys
-  return { ...obj, [head]: setPath(obj[head] ?? {}, rest.join('.'), value) }
-}
+import { setPath } from './path.js'
 
 function reorder(fields) {
   return fields.map((field, index) => ({ ...field, order: index }))

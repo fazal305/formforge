@@ -1,0 +1,51 @@
+.ff-field-library {
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.ff-field-library__group-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+  margin: 0 0 var(--space-2) var(--space-1);
+}
+
+.ff-field-library__items {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+}
+
+.ff-library-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 12px;
+  font-weight: 600;
+  text-align: left;
+  touch-action: none;
+  transition: border-color var(--transition-fast), background var(--transition-fast);
+}
+
+.ff-library-item:hover {
+  border-color: var(--color-accent);
+  background: var(--color-accent-muted);
+}
+
+.ff-library-item svg {
+  color: var(--color-text-muted);
+}
+
+.ff-library-item[data-dragging='true'] {
+  opacity: 0.4;
+}

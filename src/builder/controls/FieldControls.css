@@ -1,0 +1,89 @@
+.ff-control {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin-bottom: var(--space-4);
+}
+
+.ff-control__label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.ff-control__hint {
+  font-size: 11px;
+  color: var(--color-text-faint);
+}
+
+.ff-control__input {
+  height: 30px;
+  padding: 0 var(--space-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.ff-control__input:focus-visible {
+  border-color: var(--color-accent);
+}
+
+.ff-control--row {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ff-switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 34px;
+  height: 20px;
+  flex-shrink: 0;
+  border-radius: var(--radius-full);
+  background: var(--color-border-strong);
+  border: none;
+  padding: 2px;
+  transition: background var(--transition-fast);
+}
+
+.ff-switch[data-checked='true'] {
+  background: var(--color-accent);
+}
+
+.ff-switch__thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  transition: transform var(--transition-fast);
+}
+
+.ff-switch[data-checked='true'] .ff-switch__thumb {
+  transform: translateX(14px);
+}
+
+.ff-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.ff-options-list__row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.ff-options-list__row .ff-control__input {
+  flex: 1;
+  min-width: 0;
+}
+
+.ff-file-config {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}

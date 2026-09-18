@@ -2,6 +2,8 @@
 
 **Design a form visually. Generate the application behind it.**
 
+**[Live demo →](https://formforge-ochre.vercel.app)**
+
 FormForge is a schema-driven visual form builder and code generator. You design a form on a canvas — drag or click to add fields, configure validation, preview it live — and FormForge compiles that design into a standalone, independent project: a real HTML/CSS/JS frontend, a PHP backend with server-side validation and secure file uploads, and a MySQL schema, all downloadable as a ZIP.
 
 It isn't a form-with-a-submit-button. The architecture is closer to a small compiler: one internal Form Schema feeds every output (preview, HTML, JavaScript, PHP, SQL, JSON Schema), so nothing is hand-authored twice and nothing can silently drift out of sync.

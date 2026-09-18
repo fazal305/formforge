@@ -110,6 +110,10 @@ The suite includes golden-fixture tests for four representative forms (contact f
 - Additional database targets (PostgreSQL)
 - An AI-assisted "describe your form" schema draft (would still route through the same schema validator and require explicit user review before applying — never executed directly)
 
+## License
+
+[MIT](LICENSE)
+
 ---
 
 _FormForge is a portfolio project demonstrating schema-driven code generation, not a production SaaS product._

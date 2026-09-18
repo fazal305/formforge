@@ -22,7 +22,7 @@ Visual Builder → Form Schema → Validation Engine → Live Preview → Code G
 
 ## Screenshots
 
-_Coming soon — will be added once the project is deployed._
+![FormForge builder — job application form with fields selected](public/screenshots/builder.png)
 
 ## Architecture
 

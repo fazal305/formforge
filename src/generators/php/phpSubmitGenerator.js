@@ -58,7 +58,7 @@ const FORMFORGE_UPLOAD_FIELDS = ${encodePhpValue(uploadFields)};
  */
 function formforge_is_safe_upload_extension(string $extension): bool
 {
-    $dangerous = ['php', 'php3', 'php4', 'php5', 'phtml', 'phar', 'exe', 'sh', 'bat', 'cmd', 'js', 'jsp', 'asp', 'aspx', 'cgi', 'pl', 'py'];
+    $dangerous = ['php', 'php3', 'php4', 'php5', 'phtml', 'phar', 'exe', 'sh', 'bat', 'cmd', 'js', 'jsp', 'asp', 'aspx', 'cgi', 'pl', 'py', 'json'];
     return !in_array($extension, $dangerous, true);
 }
 

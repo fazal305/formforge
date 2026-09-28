@@ -23,5 +23,5 @@ UPLOAD_DIR=../../uploads
 # Origin allowed to call this API from a browser (e.g. https://example.com).
 # "*" allows any origin — fine for local development, narrow it for production.
 CORS_ALLOWED_ORIGIN=*
-`
+`;
 }

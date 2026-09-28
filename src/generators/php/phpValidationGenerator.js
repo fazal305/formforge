@@ -1,4 +1,4 @@
-import { encodePhpValue } from './phpValueSerializer.js'
+import { encodePhpValue } from "./phpValueSerializer.js";
 
 /**
  * The server-side half of the client+server validation split (section 17).
@@ -13,12 +13,12 @@ import { encodePhpValue } from './phpValueSerializer.js'
  */
 export function generatePhpValidation(schema) {
   const fieldsMeta = schema.fields
-    .filter((f) => f.type !== 'hidden' && f.type !== 'file')
+    .filter((f) => f.type !== "hidden" && f.type !== "file")
     .map((f) => ({
       name: f.name,
       type: f.type,
       validation: f.validation ?? {},
-    }))
+    }));
 
   return `<?php
 declare(strict_types=1);
@@ -150,5 +150,5 @@ function formforge_validate_all(array $fields, array $data): array
     }
     return $errors;
 }
-`
+`;
 }

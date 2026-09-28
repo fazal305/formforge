@@ -5,7 +5,7 @@
   grid-column: span 2;
 }
 
-.ff-preview-field[data-width='half'] {
+.ff-preview-field[data-width="half"] {
   grid-column: span 1;
 }
 
@@ -40,7 +40,7 @@ textarea.ff-preview-field__input {
   border-color: var(--color-accent);
 }
 
-.ff-preview-field__input[aria-invalid='true'] {
+.ff-preview-field__input[aria-invalid="true"] {
   border-color: var(--color-danger);
 }
 

@@ -1,6 +1,6 @@
-import JSZip from 'jszip'
-import { generateExportFiles } from './generateExportFiles.js'
-import { toKebabSlug } from './slug.js'
+import JSZip from "jszip";
+import { generateExportFiles } from "./generateExportFiles.js";
+import { toKebabSlug } from "./slug.js";
 
 /**
  * Assembles the selected files under a single root folder and returns a
@@ -9,14 +9,14 @@ import { toKebabSlug } from './slug.js'
  * folder without files in it (section 26).
  */
 export async function buildProjectZip(schema, options) {
-  const files = generateExportFiles(schema, options)
-  const root = toKebabSlug(schema.name)
+  const files = generateExportFiles(schema, options);
+  const root = toKebabSlug(schema.name);
 
-  const zip = new JSZip()
+  const zip = new JSZip();
   for (const [path, content] of Object.entries(files)) {
-    zip.file(`${root}/${path}`, content)
+    zip.file(`${root}/${path}`, content);
   }
 
-  const blob = await zip.generateAsync({ type: 'blob' })
-  return { blob, filename: `${root}.zip` }
+  const blob = await zip.generateAsync({ type: "blob" });
+  return { blob, filename: `${root}.zip` };
 }

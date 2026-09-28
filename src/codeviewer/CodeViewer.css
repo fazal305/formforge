@@ -43,7 +43,7 @@
   color: var(--color-text);
 }
 
-.ff-code-viewer__file[data-active='true'] {
+.ff-code-viewer__file[data-active="true"] {
   background: var(--color-accent-muted);
   color: var(--color-accent);
   font-weight: 600;

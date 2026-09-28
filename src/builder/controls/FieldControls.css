@@ -49,7 +49,7 @@
   transition: background var(--transition-fast);
 }
 
-.ff-switch[data-checked='true'] {
+.ff-switch[data-checked="true"] {
   background: var(--color-accent);
 }
 
@@ -61,7 +61,7 @@
   transition: transform var(--transition-fast);
 }
 
-.ff-switch[data-checked='true'] .ff-switch__thumb {
+.ff-switch[data-checked="true"] .ff-switch__thumb {
   transform: translateX(14px);
 }
 

@@ -41,8 +41,9 @@
   --color-code-muted: #8a8a86;
 
   /* ---- Typography ---- */
-  --font-ui: 'Manrope', system-ui, 'Segoe UI', sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Consolas, monospace;
+  --font-ui: "Manrope", system-ui, "Segoe UI", sans-serif;
+  --font-mono:
+    "JetBrains Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
 
   /* ---- Spacing scale (4px base) ---- */
   --space-1: 4px;
@@ -64,7 +65,7 @@
 
   /* ---- Shadows (used sparingly: overlays/drawers only) ---- */
   --shadow-sm: 0 1px 2px rgba(15, 15, 12, 0.06);
-  --shadow-md: 0 4px 12px rgba(15, 15, 12, 0.10);
+  --shadow-md: 0 4px 12px rgba(15, 15, 12, 0.1);
   --shadow-lg: 0 12px 32px rgba(15, 15, 12, 0.16);
 
   /* ---- Layout ---- */
@@ -75,7 +76,7 @@
   --transition-base: 180ms ease;
 }
 
-:root[data-theme='dark'] {
+:root[data-theme="dark"] {
   color-scheme: dark;
 
   --color-background: #121214;
@@ -110,7 +111,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) {
+  :root:not([data-theme="light"]) {
     color-scheme: dark;
 
     --color-background: #121214;

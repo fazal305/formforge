@@ -6,26 +6,26 @@
  * first, then quote), never naively wrapped in quotes (section 59).
  */
 export function encodePhpString(value) {
-  const escaped = String(value).replace(/\\/g, '\\\\').replace(/'/g, "\\'")
-  return `'${escaped}'`
+  const escaped = String(value).replace(/\\/g, "\\\\").replace(/'/g, "\\'");
+  return `'${escaped}'`;
 }
 
 export function encodePhpValue(value) {
-  if (value === null || value === undefined) return 'null'
-  if (typeof value === 'boolean') return value ? 'true' : 'false'
-  if (typeof value === 'number') return String(value)
-  if (typeof value === 'string') return encodePhpString(value)
+  if (value === null || value === undefined) return "null";
+  if (typeof value === "boolean") return value ? "true" : "false";
+  if (typeof value === "number") return String(value);
+  if (typeof value === "string") return encodePhpString(value);
 
   if (Array.isArray(value)) {
-    return '[' + value.map(encodePhpValue).join(', ') + ']'
+    return "[" + value.map(encodePhpValue).join(", ") + "]";
   }
 
-  if (typeof value === 'object') {
+  if (typeof value === "object") {
     const entries = Object.entries(value).map(
       ([key, val]) => `${encodePhpString(key)} => ${encodePhpValue(val)}`,
-    )
-    return '[' + entries.join(', ') + ']'
+    );
+    return "[" + entries.join(", ") + "]";
   }
 
-  return 'null'
+  return "null";
 }

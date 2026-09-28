@@ -4,7 +4,7 @@
   gap: var(--space-4);
 }
 
-.ff-preview-form[data-layout='two-column'] {
+.ff-preview-form[data-layout="two-column"] {
   grid-template-columns: 1fr 1fr;
 }
 

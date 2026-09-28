@@ -33,5 +33,5 @@ return [
         'allowed_origin' => getenv('CORS_ALLOWED_ORIGIN') ?: '*',
     ],
 ];
-`
+`;
 }

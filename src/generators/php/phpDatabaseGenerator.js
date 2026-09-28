@@ -41,5 +41,5 @@ function formforge_insert_submission(PDO $pdo, string $table, array $columns, ar
     $statement = $pdo->prepare($sql);
     $statement->execute(array_values($values));
 }
-`
+`;
 }

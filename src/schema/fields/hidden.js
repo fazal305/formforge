@@ -1,14 +1,14 @@
 export default {
-  type: 'hidden',
-  label: 'Hidden',
-  icon: 'eye-off',
-  category: 'advanced',
+  type: "hidden",
+  label: "Hidden",
+  icon: "eye-off",
+  category: "advanced",
   defaultConfig: () => ({
-    defaultValue: '',
+    defaultValue: "",
   }),
-  capabilities: ['defaultValue'],
+  capabilities: ["defaultValue"],
   propertySchema: [
-    { key: 'name', control: 'identifier', label: 'Field name' },
-    { key: 'defaultValue', control: 'text', label: 'Value' },
+    { key: "name", control: "identifier", label: "Field name" },
+    { key: "defaultValue", control: "text", label: "Value" },
   ],
-}
+};

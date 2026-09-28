@@ -1,27 +1,38 @@
-import { useSortable } from '@dnd-kit/sortable'
-import { CSS } from '@dnd-kit/utilities'
-import { getFieldDefinition } from '../schema/fieldRegistry.js'
-import { getPath } from '../schema/path.js'
-import { useBuilder } from './BuilderContext.jsx'
-import { FieldTypeIcon } from './fieldIcons.jsx'
-import { IconButton } from '../components/ui/Button.jsx'
-import { GripIcon, DuplicateIcon, DeleteIcon } from '../components/ui/icons.jsx'
-import './FieldRow.css'
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+import { getFieldDefinition } from "../schema/fieldRegistry.js";
+import { getPath } from "../schema/path.js";
+import { useBuilder } from "./BuilderContext.jsx";
+import { FieldTypeIcon } from "./fieldIcons.jsx";
+import { IconButton } from "../components/ui/Button.jsx";
+import {
+  GripIcon,
+  DuplicateIcon,
+  DeleteIcon,
+} from "../components/ui/icons.jsx";
+import "./FieldRow.css";
 
 export function FieldRow({ field }) {
-  const { dispatch, selectedFieldId, selectField } = useBuilder()
-  const definition = getFieldDefinition(field.type)
-  const isSelected = field.id === selectedFieldId
-  const required = getPath(field, 'validation.required') === true
+  const { dispatch, selectedFieldId, selectField } = useBuilder();
+  const definition = getFieldDefinition(field.type);
+  const isSelected = field.id === selectedFieldId;
+  const required = getPath(field, "validation.required") === true;
 
-  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({
     id: field.id,
-  })
+  });
 
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
-  }
+  };
 
   return (
     <div
@@ -59,8 +70,8 @@ export function FieldRow({ field }) {
         <IconButton
           label="Duplicate field"
           onClick={(e) => {
-            e.stopPropagation()
-            dispatch({ type: 'DUPLICATE_FIELD', fieldId: field.id })
+            e.stopPropagation();
+            dispatch({ type: "DUPLICATE_FIELD", fieldId: field.id });
           }}
         >
           <DuplicateIcon size={14} />
@@ -68,13 +79,13 @@ export function FieldRow({ field }) {
         <IconButton
           label="Delete field"
           onClick={(e) => {
-            e.stopPropagation()
-            dispatch({ type: 'DELETE_FIELD', fieldId: field.id })
+            e.stopPropagation();
+            dispatch({ type: "DELETE_FIELD", fieldId: field.id });
           }}
         >
           <DeleteIcon size={14} />
         </IconButton>
       </div>
     </div>
-  )
+  );
 }

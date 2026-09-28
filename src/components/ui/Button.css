@@ -7,7 +7,10 @@
   border: 1px solid transparent;
   font-weight: 600;
   white-space: nowrap;
-  transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
 }
 
 .ff-button--md {
@@ -72,7 +75,10 @@
   border: 1px solid transparent;
   background: transparent;
   color: var(--color-text-muted);
-  transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast),
+    border-color var(--transition-fast);
 }
 
 .ff-icon-button:hover {

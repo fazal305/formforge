@@ -1,6 +1,6 @@
-import './Panel.css'
+import "./Panel.css";
 
-export function Panel({ title, actions, children, className = '', ...rest }) {
+export function Panel({ title, actions, children, className = "", ...rest }) {
   return (
     <section className={`ff-panel ${className}`.trim()} {...rest}>
       {title ? (
@@ -11,7 +11,7 @@ export function Panel({ title, actions, children, className = '', ...rest }) {
       ) : null}
       <div className="ff-panel__body">{children}</div>
     </section>
-  )
+  );
 }
 
 export function EmptyState({ icon, title, description, action }) {
@@ -19,8 +19,10 @@ export function EmptyState({ icon, title, description, action }) {
     <div className="ff-empty-state">
       {icon ? <div className="ff-empty-state__icon">{icon}</div> : null}
       <p className="ff-empty-state__title">{title}</p>
-      {description ? <p className="ff-empty-state__description">{description}</p> : null}
+      {description ? (
+        <p className="ff-empty-state__description">{description}</p>
+      ) : null}
       {action ? <div className="ff-empty-state__action">{action}</div> : null}
     </div>
-  )
+  );
 }

@@ -55,7 +55,9 @@
   min-height: 0;
   min-width: 0;
   display: grid;
-  grid-template-columns: var(--panel-library-width) minmax(0, 1fr) var(--panel-inspector-width);
+  grid-template-columns: var(--panel-library-width) minmax(0, 1fr) var(
+      --panel-inspector-width
+    );
   /* Off-canvas mobile drawers translate outside this box; clip them here
      rather than suppressing overflow globally on body/html. */
   overflow-x: hidden;
@@ -113,7 +115,7 @@
     left: 0;
   }
 
-  .ff-shell__library[data-open='true'] {
+  .ff-shell__library[data-open="true"] {
     transform: translateX(0);
   }
 
@@ -123,7 +125,7 @@
     transform: translateX(105%);
   }
 
-  .ff-shell__inspector[data-open='true'] {
+  .ff-shell__inspector[data-open="true"] {
     transform: translateX(0);
   }
 
@@ -157,7 +159,7 @@
     font-size: 11px;
   }
 
-  .ff-shell__mobile-toolbar-item[data-active='true'] {
+  .ff-shell__mobile-toolbar-item[data-active="true"] {
     color: var(--color-accent);
   }
 

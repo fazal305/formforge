@@ -1,5 +1,5 @@
-import { encodePhpValue, encodePhpString } from './phpValueSerializer.js'
-import { getTableName } from '../tableName.js'
+import { encodePhpValue, encodePhpString } from "./phpValueSerializer.js";
+import { getTableName } from "../tableName.js";
 
 /**
  * The request entry point. Parses input, re-validates everything server
@@ -10,18 +10,27 @@ import { getTableName } from '../tableName.js'
  */
 export function generatePhpSubmit(schema) {
   const uploadFields = schema.fields
-    .filter((f) => f.type === 'file')
-    .map((f) => ({ name: f.name, validation: f.validation ?? {}, fileConfig: f.fileConfig ?? {} }))
+    .filter((f) => f.type === "file")
+    .map((f) => ({
+      name: f.name,
+      validation: f.validation ?? {},
+      fileConfig: f.fileConfig ?? {},
+    }));
 
   // Password fields are never persisted — storing submitted plaintext
   // credentials would be an active security liability, not a convenience,
   // and this form builder gives no way to hash them meaningfully as a
   // generic "submission" record. Kept consistent with the SQL generator's
   // column mapping (Phase 9), which excludes them from the table entirely.
-  const storableFields = schema.fields.filter((f) => f.type !== 'file' && f.type !== 'password')
-  const columnNames = [...storableFields.map((f) => f.name), ...uploadFields.map((f) => f.name)]
+  const storableFields = schema.fields.filter(
+    (f) => f.type !== "file" && f.type !== "password",
+  );
+  const columnNames = [
+    ...storableFields.map((f) => f.name),
+    ...uploadFields.map((f) => f.name),
+  ];
 
-  const tableName = getTableName(schema)
+  const tableName = getTableName(schema);
 
   return `<?php
 declare(strict_types=1);
@@ -47,7 +56,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') !== ${encodePhpString(schema.settings.met
 require __DIR__ . '/../validation/validation.php';
 require __DIR__ . '/../config/database.php';
 
-const FORMFORGE_STORE_SUBMISSIONS = ${schema.settings.storeSubmissions ? 'true' : 'false'};
+const FORMFORGE_STORE_SUBMISSIONS = ${schema.settings.storeSubmissions ? "true" : "false"};
 const FORMFORGE_TABLE_NAME = ${encodePhpString(tableName)};
 const FORMFORGE_COLUMNS = ${encodePhpValue(columnNames)};
 const FORMFORGE_UPLOAD_FIELDS = ${encodePhpValue(uploadFields)};
@@ -181,5 +190,5 @@ if (FORMFORGE_STORE_SUBMISSIONS) {
 
 http_response_code(200);
 echo json_encode(['success' => true]);
-`
+`;
 }

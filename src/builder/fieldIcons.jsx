@@ -13,7 +13,7 @@ import {
   Clock,
   Upload,
   EyeOff,
-} from 'lucide-react'
+} from "lucide-react";
 
 const ICONS_BY_KEY = {
   text: Type,
@@ -22,18 +22,18 @@ const ICONS_BY_KEY = {
   hash: Hash,
   phone: Phone,
   link: LinkIcon,
-  'align-left': AlignLeft,
-  'chevron-down': ChevronDown,
-  'circle-dot': CircleDot,
-  'check-square': CheckSquare,
+  "align-left": AlignLeft,
+  "chevron-down": ChevronDown,
+  "circle-dot": CircleDot,
+  "check-square": CheckSquare,
   calendar: Calendar,
   clock: Clock,
   upload: Upload,
-  'eye-off': EyeOff,
-}
+  "eye-off": EyeOff,
+};
 
 /** Resolves a registry entry's `icon` key (e.g. "mail") to its Lucide component. */
 export function FieldTypeIcon({ iconKey, ...rest }) {
-  const Icon = ICONS_BY_KEY[iconKey] ?? Type
-  return <Icon size={16} strokeWidth={2} {...rest} />
+  const Icon = ICONS_BY_KEY[iconKey] ?? Type;
+  return <Icon size={16} strokeWidth={2} {...rest} />;
 }

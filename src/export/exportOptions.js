@@ -7,7 +7,7 @@ export function createDefaultExportOptions(schema) {
   return {
     frontend: true,
     jsonSchema: true,
-    backend: schema.settings.storeSubmissions ? 'php' : 'none',
-    database: schema.settings.storeSubmissions ? 'mysql' : 'none',
-  }
+    backend: schema.settings.storeSubmissions ? "php" : "none",
+    database: schema.settings.storeSubmissions ? "mysql" : "none",
+  };
 }

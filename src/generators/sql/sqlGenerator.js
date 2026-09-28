@@ -1,7 +1,7 @@
-import { getTableName } from '../tableName.js'
-import { buildColumnMapping } from './columnMapping.js'
+import { getTableName } from "../tableName.js";
+import { buildColumnMapping } from "./columnMapping.js";
 
-const IDENTIFIER_PATTERN = /^[a-z][a-z0-9_]{0,62}$/
+const IDENTIFIER_PATTERN = /^[a-z][a-z0-9_]{0,62}$/;
 
 /**
  * Table and column names come from FormForge's own identifier allowlist
@@ -12,34 +12,38 @@ const IDENTIFIER_PATTERN = /^[a-z][a-z0-9_]{0,62}$/
  */
 function assertSafeIdentifier(name) {
   if (!IDENTIFIER_PATTERN.test(name)) {
-    throw new Error(`Refusing to generate SQL for unsafe identifier: "${name}"`)
+    throw new Error(
+      `Refusing to generate SQL for unsafe identifier: "${name}"`,
+    );
   }
-  return name
+  return name;
 }
 
 export function generateSql(schema) {
-  const table = assertSafeIdentifier(getTableName(schema))
-  const mapping = buildColumnMapping(schema).filter((entry) => entry.stored)
+  const table = assertSafeIdentifier(getTableName(schema));
+  const mapping = buildColumnMapping(schema).filter((entry) => entry.stored);
 
   const columnLines = mapping.map((entry) => {
-    const column = assertSafeIdentifier(entry.column)
-    const nullability = entry.nullable ? 'NULL' : 'NOT NULL'
-    return `  \`${column}\` ${entry.sqlType} ${nullability}`
-  })
+    const column = assertSafeIdentifier(entry.column);
+    const nullability = entry.nullable ? "NULL" : "NOT NULL";
+    return `  \`${column}\` ${entry.sqlType} ${nullability}`;
+  });
 
   const lines = [
     `  \`id\` BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY`,
     ...columnLines,
     `  \`created_at\` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP`,
-  ]
+  ];
 
-  const skipped = buildColumnMapping(schema).filter((entry) => !entry.stored)
+  const skipped = buildColumnMapping(schema).filter((entry) => !entry.stored);
   const skippedComment = skipped.length
-    ? skipped.map((entry) => `-- Skipped: \`${entry.field}\` (${entry.note})`).join('\n') + '\n'
-    : ''
+    ? skipped
+        .map((entry) => `-- Skipped: \`${entry.field}\` (${entry.note})`)
+        .join("\n") + "\n"
+    : "";
 
   return `${skippedComment}CREATE TABLE IF NOT EXISTS \`${table}\` (
-${lines.join(',\n')}
+${lines.join(",\n")}
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-`
+`;
 }

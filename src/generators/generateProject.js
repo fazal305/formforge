@@ -1,6 +1,6 @@
-import { generateFrontendFiles } from './generateFrontend.js'
-import { generateBackendFiles } from './generateBackend.js'
-import { generateDatabaseFiles } from './generateDatabase.js'
+import { generateFrontendFiles } from "./generateFrontend.js";
+import { generateBackendFiles } from "./generateBackend.js";
+import { generateDatabaseFiles } from "./generateDatabase.js";
 
 /**
  * Combines the independent generators into one file map. No option-gating
@@ -13,5 +13,5 @@ export function generateProjectFiles(schema) {
     ...generateFrontendFiles(schema),
     ...generateBackendFiles(schema),
     ...generateDatabaseFiles(schema),
-  }
+  };
 }

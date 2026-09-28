@@ -82,7 +82,7 @@
   background: var(--color-danger-muted);
 }
 
-.ff-forms-dialog__list-delete[data-pending='true'] {
+.ff-forms-dialog__list-delete[data-pending="true"] {
   color: var(--color-danger);
   font-weight: 600;
   background: var(--color-danger-muted);

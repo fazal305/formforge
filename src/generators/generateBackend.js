@@ -1,8 +1,8 @@
-import { generatePhpConfig } from './php/phpConfigGenerator.js'
-import { generatePhpDatabase } from './php/phpDatabaseGenerator.js'
-import { generatePhpValidation } from './php/phpValidationGenerator.js'
-import { generatePhpSubmit } from './php/phpSubmitGenerator.js'
-import { generateEnvExample } from './php/envExampleGenerator.js'
+import { generatePhpConfig } from "./php/phpConfigGenerator.js";
+import { generatePhpDatabase } from "./php/phpDatabaseGenerator.js";
+import { generatePhpValidation } from "./php/phpValidationGenerator.js";
+import { generatePhpSubmit } from "./php/phpSubmitGenerator.js";
+import { generateEnvExample } from "./php/envExampleGenerator.js";
 
 /**
  * Assembles the independent PHP generators into a file map. Layout mirrors
@@ -14,10 +14,10 @@ import { generateEnvExample } from './php/envExampleGenerator.js'
  */
 export function generateBackendFiles(schema) {
   return {
-    'backend/api/submit.php': generatePhpSubmit(schema),
-    'backend/config/config.php': generatePhpConfig(),
-    'backend/config/database.php': generatePhpDatabase(),
-    'backend/validation/validation.php': generatePhpValidation(schema),
-    'backend/.env.example': generateEnvExample(),
-  }
+    "backend/api/submit.php": generatePhpSubmit(schema),
+    "backend/config/config.php": generatePhpConfig(),
+    "backend/config/database.php": generatePhpDatabase(),
+    "backend/validation/validation.php": generatePhpValidation(schema),
+    "backend/.env.example": generateEnvExample(),
+  };
 }

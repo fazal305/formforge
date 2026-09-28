@@ -1,4 +1,4 @@
-import './DatabaseDesigner.css'
+import "./DatabaseDesigner.css";
 
 /**
  * Shows the same field→column mapping the SQL generator reads (section 23)
@@ -20,8 +20,10 @@ export function DatabaseDesigner({ mapping }) {
           {mapping.map((entry) => (
             <tr key={entry.field} data-stored={entry.stored}>
               <td>{entry.field}</td>
-              <td className="mono">{entry.stored ? entry.column : '—'}</td>
-              <td className="mono">{entry.stored ? entry.sqlType : 'not stored'}</td>
+              <td className="mono">{entry.stored ? entry.column : "—"}</td>
+              <td className="mono">
+                {entry.stored ? entry.sqlType : "not stored"}
+              </td>
             </tr>
           ))}
         </tbody>
@@ -39,5 +41,5 @@ export function DatabaseDesigner({ mapping }) {
         </div>
       ) : null}
     </div>
-  )
+  );
 }

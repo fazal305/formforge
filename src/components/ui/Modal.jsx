@@ -1,15 +1,15 @@
-import { useEffect, useRef } from 'react'
-import { createPortal } from 'react-dom'
-import { IconButton } from './Button.jsx'
-import { CloseIcon } from './icons.jsx'
-import './Modal.css'
+import { useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
+import { IconButton } from "./Button.jsx";
+import { CloseIcon } from "./icons.jsx";
+import "./Modal.css";
 
 const FOCUSABLE_SELECTOR =
-  'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+  'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
-export function Modal({ title, onClose, children, footer, size = 'default' }) {
-  const closeButtonRef = useRef(null)
-  const dialogRef = useRef(null)
+export function Modal({ title, onClose, children, footer, size = "default" }) {
+  const closeButtonRef = useRef(null);
+  const dialogRef = useRef(null);
 
   // Separate from the keydown-listener effect below: this must run exactly
   // once on mount. onClose is an inline arrow function at every call site,
@@ -19,45 +19,48 @@ export function Modal({ title, onClose, children, footer, size = 'default' }) {
   // modal was open would silently steal focus back to the close button,
   // undoing whatever the focus trap or the user had just done.
   useEffect(() => {
-    closeButtonRef.current?.focus()
-  }, [])
+    closeButtonRef.current?.focus();
+  }, []);
 
   useEffect(() => {
     function handleKeyDown(e) {
-      if (e.key === 'Escape') {
-        onClose()
-        return
+      if (e.key === "Escape") {
+        onClose();
+        return;
       }
 
       // Focus trap: Tab/Shift+Tab wrap within the dialog instead of escaping
       // to the (visually hidden, but still tabbable) page behind it.
-      if (e.key === 'Tab' && dialogRef.current) {
+      if (e.key === "Tab" && dialogRef.current) {
         // offsetParent is null for display:none (and our [hidden] file inputs) —
         // querySelectorAll alone would include them, and .focus() on an
         // unfocusable element silently no-ops, breaking the wrap.
-        const focusable = Array.from(dialogRef.current.querySelectorAll(FOCUSABLE_SELECTOR)).filter(
-          (el) => el.offsetParent !== null,
-        )
-        if (focusable.length === 0) return
+        const focusable = Array.from(
+          dialogRef.current.querySelectorAll(FOCUSABLE_SELECTOR),
+        ).filter((el) => el.offsetParent !== null);
+        if (focusable.length === 0) return;
 
-        const first = focusable[0]
-        const last = focusable[focusable.length - 1]
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
 
         if (e.shiftKey && document.activeElement === first) {
-          e.preventDefault()
-          last.focus()
+          e.preventDefault();
+          last.focus();
         } else if (!e.shiftKey && document.activeElement === last) {
-          e.preventDefault()
-          first.focus()
+          e.preventDefault();
+          first.focus();
         }
       }
     }
-    window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [onClose])
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [onClose]);
 
   return createPortal(
-    <div className="ff-modal-backdrop" onMouseDown={(e) => e.target === e.currentTarget && onClose()}>
+    <div
+      className="ff-modal-backdrop"
+      onMouseDown={(e) => e.target === e.currentTarget && onClose()}
+    >
       <div
         ref={dialogRef}
         className={`ff-modal ff-modal--${size}`}
@@ -76,5 +79,5 @@ export function Modal({ title, onClose, children, footer, size = 'default' }) {
       </div>
     </div>,
     document.body,
-  )
+  );
 }

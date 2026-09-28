@@ -1,11 +1,16 @@
-import { useRef, useState } from 'react'
-import { useBuilder } from '../builder/BuilderContext.jsx'
-import { validateSchema } from '../schema/validateSchema.js'
-import { downloadSchemaJson, readSchemaFile } from '../schema/schemaFile.js'
-import { listSavedForms, saveForm, getSavedForm, deleteSavedForm } from '../schema/persistence.js'
-import { Button } from '../components/ui/Button.jsx'
-import { EmptyState } from '../components/ui/Panel.jsx'
-import './FormsDialog.css'
+import { useRef, useState } from "react";
+import { useBuilder } from "../builder/BuilderContext.jsx";
+import { validateSchema } from "../schema/validateSchema.js";
+import { downloadSchemaJson, readSchemaFile } from "../schema/schemaFile.js";
+import {
+  listSavedForms,
+  saveForm,
+  getSavedForm,
+  deleteSavedForm,
+} from "../schema/persistence.js";
+import { Button } from "../components/ui/Button.jsx";
+import { EmptyState } from "../components/ui/Panel.jsx";
+import "./FormsDialog.css";
 
 /**
  * Distinct from the ZIP export: this saves/loads the editable FormForge
@@ -14,69 +19,73 @@ import './FormsDialog.css'
  * the same validateSchema() that guards localStorage reads (section 56).
  */
 export function FormsDialog({ onClose }) {
-  const { schema, loadSchema } = useBuilder()
-  const [savedForms, setSavedForms] = useState(() => listSavedForms())
-  const [importError, setImportError] = useState(null)
-  const [saveError, setSaveError] = useState(null)
-  const [saveConfirmation, setSaveConfirmation] = useState(false)
-  const [pendingDeleteId, setPendingDeleteId] = useState(null)
-  const fileInputRef = useRef(null)
+  const { schema, loadSchema } = useBuilder();
+  const [savedForms, setSavedForms] = useState(() => listSavedForms());
+  const [importError, setImportError] = useState(null);
+  const [saveError, setSaveError] = useState(null);
+  const [saveConfirmation, setSaveConfirmation] = useState(false);
+  const [pendingDeleteId, setPendingDeleteId] = useState(null);
+  const fileInputRef = useRef(null);
 
   function refreshList() {
-    setSavedForms(listSavedForms())
+    setSavedForms(listSavedForms());
   }
 
   function handleSave() {
-    setSaveError(null)
-    const ok = saveForm(schema)
+    setSaveError(null);
+    const ok = saveForm(schema);
     if (!ok) {
-      setSaveError("Couldn't save — this browser's storage may be full or unavailable.")
-      return
+      setSaveError(
+        "Couldn't save — this browser's storage may be full or unavailable.",
+      );
+      return;
     }
-    refreshList()
-    setSaveConfirmation(true)
-    setTimeout(() => setSaveConfirmation(false), 1500)
+    refreshList();
+    setSaveConfirmation(true);
+    setTimeout(() => setSaveConfirmation(false), 1500);
   }
 
   function handleOpen(id) {
-    setSaveError(null)
-    const found = getSavedForm(id)
+    setSaveError(null);
+    const found = getSavedForm(id);
     if (found) {
-      loadSchema(found)
-      onClose()
+      loadSchema(found);
+      onClose();
     } else {
-      setSaveError('This saved form could not be read — it may be corrupted, and was skipped rather than applied.')
-      refreshList()
+      setSaveError(
+        "This saved form could not be read — it may be corrupted, and was skipped rather than applied.",
+      );
+      refreshList();
     }
   }
 
   function handleDeleteClick(id) {
     if (pendingDeleteId === id) {
-      deleteSavedForm(id)
-      setPendingDeleteId(null)
-      refreshList()
+      deleteSavedForm(id);
+      setPendingDeleteId(null);
+      refreshList();
     } else {
-      setPendingDeleteId(id)
+      setPendingDeleteId(id);
     }
   }
 
   async function handleImportFile(event) {
-    const file = event.target.files[0]
-    event.target.value = '' // allow re-selecting the same file again later
-    if (!file) return
+    const file = event.target.files[0];
+    event.target.value = ""; // allow re-selecting the same file again later
+    if (!file) return;
 
-    setImportError(null)
+    setImportError(null);
     try {
-      const candidate = await readSchemaFile(file)
-      const { valid, errors } = validateSchema(candidate)
+      const candidate = await readSchemaFile(file);
+      const { valid, errors } = validateSchema(candidate);
       if (!valid) {
-        setImportError(errors.join(' '))
-        return
+        setImportError(errors.join(" "));
+        return;
       }
-      loadSchema(candidate)
-      onClose()
+      loadSchema(candidate);
+      onClose();
     } catch (error) {
-      setImportError(error.message)
+      setImportError(error.message);
     }
   }
 
@@ -86,9 +95,13 @@ export function FormsDialog({ onClose }) {
         <h3>Current form</h3>
         <div className="ff-forms-dialog__actions">
           <Button variant="secondary" size="sm" onClick={handleSave}>
-            {saveConfirmation ? 'Saved!' : 'Save to this browser'}
+            {saveConfirmation ? "Saved!" : "Save to this browser"}
           </Button>
-          <Button variant="secondary" size="sm" onClick={() => downloadSchemaJson(schema)}>
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={() => downloadSchemaJson(schema)}
+          >
             Export as JSON
           </Button>
         </div>
@@ -101,7 +114,11 @@ export function FormsDialog({ onClose }) {
 
       <section className="ff-forms-dialog__section">
         <h3>Import</h3>
-        <Button variant="secondary" size="sm" onClick={() => fileInputRef.current?.click()}>
+        <Button
+          variant="secondary"
+          size="sm"
+          onClick={() => fileInputRef.current?.click()}
+        >
           Choose a .json file
         </Button>
         <input
@@ -121,12 +138,18 @@ export function FormsDialog({ onClose }) {
       <section className="ff-forms-dialog__section">
         <h3>Saved forms</h3>
         {savedForms.length === 0 ? (
-          <EmptyState title="No saved forms yet" description="Forms you save stay in this browser." />
+          <EmptyState
+            title="No saved forms yet"
+            description="Forms you save stay in this browser."
+          />
         ) : (
           <ul className="ff-forms-dialog__list">
             {savedForms.map((form) => (
               <li key={form.id}>
-                <button className="ff-forms-dialog__list-name" onClick={() => handleOpen(form.id)}>
+                <button
+                  className="ff-forms-dialog__list-name"
+                  onClick={() => handleOpen(form.id)}
+                >
                   {form.name}
                 </button>
                 <span className="ff-forms-dialog__list-date">
@@ -138,7 +161,7 @@ export function FormsDialog({ onClose }) {
                   aria-label={`Delete ${form.name}`}
                   onClick={() => handleDeleteClick(form.id)}
                 >
-                  {pendingDeleteId === form.id ? 'Confirm?' : 'Delete'}
+                  {pendingDeleteId === form.id ? "Confirm?" : "Delete"}
                 </button>
               </li>
             ))}
@@ -146,5 +169,5 @@ export function FormsDialog({ onClose }) {
         )}
       </section>
     </div>
-  )
+  );
 }

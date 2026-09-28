@@ -1,8 +1,8 @@
-import { generateFrontendFiles } from '../generators/generateFrontend.js'
-import { generateBackendFiles } from '../generators/generateBackend.js'
-import { generateDatabaseFiles } from '../generators/generateDatabase.js'
-import { generateJsonSchema } from '../generators/jsonSchemaGenerator.js'
-import { generateReadme } from '../generators/readmeGenerator.js'
+import { generateFrontendFiles } from "../generators/generateFrontend.js";
+import { generateBackendFiles } from "../generators/generateBackend.js";
+import { generateDatabaseFiles } from "../generators/generateDatabase.js";
+import { generateJsonSchema } from "../generators/jsonSchemaGenerator.js";
+import { generateReadme } from "../generators/readmeGenerator.js";
 
 /**
  * The only place export options actually gate which generators run. Every
@@ -11,27 +11,27 @@ import { generateReadme } from '../generators/readmeGenerator.js'
  * change if a new export toggle is ever added.
  */
 export function generateExportFiles(schema, options) {
-  let files = {}
+  let files = {};
 
   if (options.frontend) {
-    files = { ...files, ...generateFrontendFiles(schema) }
+    files = { ...files, ...generateFrontendFiles(schema) };
     if (!options.jsonSchema) {
-      delete files['schema/form.schema.json']
+      delete files["schema/form.schema.json"];
     }
   } else if (options.jsonSchema) {
     // JSON Schema can be requested independently of the HTML/CSS/JS frontend.
-    files['schema/form.schema.json'] = generateJsonSchema(schema)
+    files["schema/form.schema.json"] = generateJsonSchema(schema);
   }
 
-  if (options.backend === 'php') {
-    files = { ...files, ...generateBackendFiles(schema) }
+  if (options.backend === "php") {
+    files = { ...files, ...generateBackendFiles(schema) };
   }
 
-  if (options.database === 'mysql') {
-    files = { ...files, ...generateDatabaseFiles(schema) }
+  if (options.database === "mysql") {
+    files = { ...files, ...generateDatabaseFiles(schema) };
   }
 
-  files['README.md'] = generateReadme(schema, options)
+  files["README.md"] = generateReadme(schema, options);
 
-  return files
+  return files;
 }

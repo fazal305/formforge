@@ -1,4 +1,4 @@
-import { toSafeIdentifier } from '../schema/identifier.js'
+import { toSafeIdentifier } from "../schema/identifier.js";
 
 /**
  * The single source of the submissions table name — used by both the PHP
@@ -6,5 +6,5 @@ import { toSafeIdentifier } from '../schema/identifier.js'
  * they can never drift apart and reference different tables (section 32).
  */
 export function getTableName(schema) {
-  return `${toSafeIdentifier(schema.name, 'form')}_submissions`
+  return `${toSafeIdentifier(schema.name, "form")}_submissions`;
 }

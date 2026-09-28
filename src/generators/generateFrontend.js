@@ -1,7 +1,7 @@
-import { generateHtml } from './htmlGenerator.js'
-import { generateCss } from './cssGenerator.js'
-import { generateJs } from './jsGenerator.js'
-import { generateJsonSchema } from './jsonSchemaGenerator.js'
+import { generateHtml } from "./htmlGenerator.js";
+import { generateCss } from "./cssGenerator.js";
+import { generateJs } from "./jsGenerator.js";
+import { generateJsonSchema } from "./jsonSchemaGenerator.js";
 
 /**
  * Each generator is an independent pure function; this just assembles their
@@ -10,9 +10,9 @@ import { generateJsonSchema } from './jsonSchemaGenerator.js'
  */
 export function generateFrontendFiles(schema) {
   return {
-    'frontend/index.html': generateHtml(schema),
-    'frontend/styles.css': generateCss(schema),
-    'frontend/script.js': generateJs(schema),
-    'schema/form.schema.json': generateJsonSchema(schema),
-  }
+    "frontend/index.html": generateHtml(schema),
+    "frontend/styles.css": generateCss(schema),
+    "frontend/script.js": generateJs(schema),
+    "schema/form.schema.json": generateJsonSchema(schema),
+  };
 }

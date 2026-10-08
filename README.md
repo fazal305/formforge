@@ -112,8 +112,8 @@ The suite includes golden-fixture tests for four representative forms (contact f
 
 ## License
 
-[MIT](LICENSE)
+Free for personal, educational, and noncommercial use under the [PolyForm Noncommercial License 1.0.0](LICENSE).
 
----
+Commercial use requires a paid commercial license. Contact fazalabbas2002@gmail.com.
 
-_FormForge is a portfolio project demonstrating schema-driven code generation, not a production SaaS product._
+Versions up to and including `last-mit` were released under the MIT License and remain available under MIT.
